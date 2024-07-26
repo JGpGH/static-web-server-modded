@@ -5,7 +5,7 @@
     /></a>
   </div>
 
-  <h1 align="center">Static Web Server</h1>
+  <h1 align="center">Static Web Server (modded)</h1>
 
   <h4 align="center">
     A cross-platform, high-performance and asynchronous web server for static files-serving ⚡
@@ -26,6 +26,9 @@
 </div>
 
 ## Overview
+
+I forked this to play around mostly and add my auth service instead of basic_auth.<br>
+If whoever read this is an actual contributor/author: Thank you! Great Job!
 
 **Static Web Server** (or **`SWS`** abbreviated) is a tiny and fast production-ready web server suitable to serve static web files or assets.
 
