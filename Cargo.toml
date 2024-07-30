@@ -73,7 +73,7 @@ globset = { version = "0.4", features = ["serde1"] }
 headers = "0.3"
 http = "0.2"
 http-serde = "1.1"
-hyper = { version = "0.14", features = ["stream", "http1", "http2", "tcp", "server"] }
+hyper = { version = "0.14", features = ["stream", "http1", "http2", "tcp", "server", "client"] }
 lazy_static = "1.5"
 listenfd = "1.0"
 maud = { version = "0.26", optional = true }
@@ -93,6 +93,7 @@ toml = "0.8"
 tracing = { version = "0.1", default-features = false, features = ["std"] }
 tracing-subscriber = { version = "0.3", default-features = false, features = ["smallvec", "registry", "parking_lot", "fmt", "ansi", "tracing-log"] }
 shadow-rs = "0.29"
+session = { git = "ssh://git@github.com/JGpGH/SuperFruitMix-Session-Rust.git", branch = "main" }
 
 [target.'cfg(all(target_env = "musl", target_pointer_width = "64"))'.dependencies.tikv-jemallocator]
 version = "0.6"
