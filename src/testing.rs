@@ -109,6 +109,7 @@ pub mod fixtures {
 
         RequestHandler {
             opts: Arc::from(req_handler_opts),
+            auth_client: None,
         }
     }
 }

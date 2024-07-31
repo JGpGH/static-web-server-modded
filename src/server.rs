@@ -44,7 +44,7 @@ use crate::{compression, compression_static};
 use crate::basic_auth;
 
 use crate::{
-    control_headers, cors, health, helpers, log_addr, maintenance_mode, security_headers, Settings,
+    auth, control_headers, cors, health, helpers, log_addr, maintenance_mode, security_headers, Settings
 };
 use crate::{service::RouterService, Context, Result};
 
@@ -340,6 +340,7 @@ impl Server {
 
         // Create a service router for Hyper
         let router_service = RouterService::new(RequestHandler {
+            auth_client: Some(auth::AuthClient::from_conn_str(&handler_opts.basic_auth).unwrap()),
             opts: Arc::from(handler_opts),
         });
 

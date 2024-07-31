@@ -28,12 +28,7 @@ use crate::fallback_page;
 use crate::metrics;
 
 use crate::{
-    control_headers, cors, custom_headers, error_page, health,
-    http_ext::MethodExt,
-    log_addr, maintenance_mode, redirects, rewrites, security_headers,
-    settings::Advanced,
-    static_files::{self, HandleOpts},
-    virtual_hosts, Error, Result,
+    auth, control_headers, cors, custom_headers, error_page, health, http_ext::MethodExt, log_addr, maintenance_mode, redirects, rewrites, security_headers, settings::Advanced, static_files::{self, HandleOpts}, virtual_hosts, Error, Result
 };
 
 #[cfg(feature = "directory-listing")]
@@ -162,6 +157,7 @@ impl Default for RequestHandlerOpts {
 pub struct RequestHandler {
     /// Request handler options.
     pub opts: Arc<RequestHandlerOpts>,
+    pub auth_client: Option<auth::AuthClient>,
 }
 
 impl RequestHandler {
@@ -218,6 +214,12 @@ impl RequestHandler {
             #[cfg(feature = "basic-auth")]
             if let Some(response) = basic_auth::pre_process(&self.opts, req) {
                 return response;
+            }
+
+            if let Some(auth_client) = self.auth_client.as_ref() {
+                if let Some(response) = auth::handler::pre_process(&self.opts, auth_client, req) {
+                    return response;
+                }
             }
 
             // Maintenance Mode
