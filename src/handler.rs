@@ -157,6 +157,7 @@ impl Default for RequestHandlerOpts {
 pub struct RequestHandler {
     /// Request handler options.
     pub opts: Arc<RequestHandlerOpts>,
+    /// provisionary 
     pub auth_client: Option<auth::AuthClient>,
 }
 

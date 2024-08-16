@@ -9,15 +9,15 @@ use crate::{error_page, handler::RequestHandlerOpts, Error};
 
 use super::auth_client::AuthClient;
 
-struct ResponseBuilder<'a, 'b> {
+struct _ResponseBuilder<'a, 'b> {
     uri: &'b Uri,
     method: &'b Method,
     page404: &'a Path,
     page50x: &'a Path,
 }
 
-impl<'a, 'b> ResponseBuilder<'a, 'b> {
-    pub fn from<T>(opts: &'a RequestHandlerOpts, request: &'b Request<T>) -> Self {
+impl<'a, 'b> _ResponseBuilder<'a, 'b> {
+    pub fn _from<T>(opts: &'a RequestHandlerOpts, request: &'b Request<T>) -> Self {
         Self {
             uri: request.uri(),
             method: request.method(),
@@ -26,7 +26,7 @@ impl<'a, 'b> ResponseBuilder<'a, 'b> {
         }
     }
 
-    pub fn my_bad(&self, reason: &str) -> Response<Body> {
+    pub fn _my_bad(&self, reason: &str) -> Response<Body> {
         tracing::error!(reason);
         error_page::error_response(
             &self.uri,
@@ -37,7 +37,7 @@ impl<'a, 'b> ResponseBuilder<'a, 'b> {
         ).unwrap()
     }
 
-    pub fn unauthorized(&self) -> Response<Body> {
+    pub fn _unauthorized(&self) -> Response<Body> {
         error_page::error_response(
             &self.uri,
             &self.method,
@@ -50,9 +50,9 @@ impl<'a, 'b> ResponseBuilder<'a, 'b> {
 
 /// Handles `Basic` HTTP Authorization Schema
 pub(crate) fn pre_process<T>(
-    opts: &RequestHandlerOpts,
-    auth_client: &AuthClient,
-    req: &Request<T>,
+    _opts: &RequestHandlerOpts,
+    _auth_client: &AuthClient,
+    _req: &Request<T>,
 ) -> Option<Result<Response<Body>, Error>> {
-    
+    return None
 }
